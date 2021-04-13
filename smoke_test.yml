@@ -1,0 +1,19 @@
+---
+- name: End to end smoke tests database servers
+  hosts: app_servers:database_servers
+  gather_facts: true
+  become: true
+  ignore_errors: yes
+  tags:
+    - smoketest_database  
+  roles: 
+    - smoketest_database
+
+- name: End to end smoke tests webservers
+  hosts: app_servers
+  become: false
+  gather_facts: false
+  tags:
+    - smoketest_webservers 
+  roles:
+    - smoketest_webservers
